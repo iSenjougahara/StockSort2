@@ -32,21 +32,7 @@
     </div>
 </nav>
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('User Profile') }}</div>
-
-                    <div class="card-body">
-                        <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
-                        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                        <p><strong>Job:</strong> {{ Auth::user()->cargo }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
 
 <table class="table">
@@ -60,14 +46,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
+        @foreach ($produtos as $produto)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->cargo }}</td>
-                <td><a href="{{ url('editUser/' . $user->id . '/edit') }}">Edit</a></td>
+                <td>{{ $produto->name }}</td>
+                <td>{{ $produto->setor }}</td>
+                <td>{{ $produto->valor }}</td>
+                <td><a href="{{ url('editProduto/' . $produto->id . '/edit') }}">Edit</a></td>
                 <td>
-                    <form action="{{ url('deleteUser/' . $user->id) }}" method="POST">
+                    <form action="{{ url('deleteUser/' . $produto->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -80,7 +66,7 @@
 
 
 
-{{ $users->links('pagination::bootstrap-4')->with([
+{{ $produtos->links('pagination::bootstrap-4')->with([
     'size' => 'sm',
     'class' => 'pagination-sm'
 ]) }}

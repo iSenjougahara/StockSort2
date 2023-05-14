@@ -18,7 +18,7 @@ use App\Models\User;
 |
 */
 
-
+Route::get('/products', [ProdutoController::class, 'show']);
 Route::get('/index', [UserController::class, 'show']);
 
 
@@ -71,6 +71,8 @@ Route::get('/login',[UserController::class, 'show']);
 
 //Route::get('/editUser',[UserController::class, 'show']);
 Route::get('/editUser/{id}/edit',[UserController::class, 'showEdit']);
+Route::get('/editProduto/{id}/edit',[ProdutoController::class, 'showEdit']);
+Route::put('/editProduto/{id}',[ProdutoController::class, 'produtoUpdate'])->name('produtoUpdate');
 Route::put('/userUpdate/{id}',[UserController::class, 'userUpdate'])->name('userUpdate');
 
 Route::delete('/deleteUser/{user}', [UserController::class, 'deleteUser'])->name('deleteUser');
