@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('lotes', function (Blueprint $table) {
             $table->id();
+            $table->date('validade');
+            $table->string('codebar');
+            $table->integer('valor');
+            $table->unsignedBigInteger('produto_id')->nullable();
+            $table->foreign('produto_id')->references('id')->on('produtos');
             $table->timestamps();
         });
     }

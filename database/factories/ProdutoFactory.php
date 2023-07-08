@@ -16,6 +16,7 @@ class ProdutoFactory extends Factory
      */
     public function definition(): array
     {
+        
         return [
             'name' => $this->faker->randomElement($array=['frango', 'bovino','suino']),
             'valor'=> $this->faker->numberBetween($min = 100, $max = 200),

@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Produto extends Model
+class Movimento extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'setor', 'valor'];
 
-    public function lotes()
+    public function lote()
     {
-        return $this->hasMany(lote::class);
+        return $this->belongsTo(lote::class,'lote_id');
     }
 }

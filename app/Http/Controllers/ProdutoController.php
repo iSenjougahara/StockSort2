@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class ProdutoController extends Controller
 {
@@ -12,6 +14,12 @@ class ProdutoController extends Controller
       return view('produtoIndex', compact('produtos'));
 
    }
+
+   public function show2() {
+    $produtos = Produto::all();
+   return response()->json($produtos);
+
+}
 
 
    public function showEdit($id)
@@ -29,6 +37,30 @@ class ProdutoController extends Controller
     
     $prod->save();
 
-    return redirect('ProdutoIndex.blade')->with('message', 'Produto updated successfully.');
+    return redirect('products')->with('message', 'Produto updated successfully.');
+}
+public function store(Request $request)  {
+    $formFields = $request->validate([
+        'name' => 'required',
+        'setor' => 'required',
+        'valor' => 'required',
+       
+    ]);
+   // // Create User
+ 
+   //DB::connection()->enableQueryLog();
+
+   Produto::create($formFields);
+  
+//    dd(DB::getQueryLog());
+   
+   return redirect('products')->with('message', 'produto created ');
+
+   }
+public function deleteProduto(Produto $produto)
+{
+    $produto->delete();
+
+    return redirect('products')->with('message', 'User deleted successfully.');
 }
 }

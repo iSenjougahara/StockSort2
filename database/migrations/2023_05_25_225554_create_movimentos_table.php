@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vitrine', function (Blueprint $table) {
+        Schema::create('movimentos', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
+            $table->integer('quantidade');
+            $table->string('local');
+            $table->unsignedBigInteger('lote_id')->nullable();
+            $table->foreign('lote_id')->references('id')->on('lotes');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vitrine');
+        Schema::dropIfExists('movimentos');
     }
 };

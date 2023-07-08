@@ -28,26 +28,14 @@
             <li class="nav-item">
               <a class="nav-link" href="/products">Check Products</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/lotes">Check Lotes</a>
-            </li>
         </ul>
     </div>
 </nav>
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('User Profile') }}</div>
-
-                    <div class="card-body">
-                        <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
-                        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-                        <p><strong>Job:</strong> {{ Auth::user()->cargo }}</p>
-                    </div>
-                </div>
-            </div>
+<div class="container mt-5">
+    <div class="row justify-content-end mb-3">
+        <div class="col-md-6">
+            <a href="/newLote" class="btn btn-primary">New Lote</a>
         </div>
     </div>
 
@@ -55,22 +43,26 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Job</th>
+            <th>validade</th>
+            <th>codebar</th>
+            <th>quantidade</th>
+            <th>produto</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
+        @foreach ($lotes as $lote)
             <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->cargo }}</td>
-                <td><a href="{{ url('editUser/' . $user->id . '/edit') }}">Edit</a></td>
+                <td>{{ $lote->validade }}</td>
+                <td>{{ $lote->codebar }}</td>
+                <td>{{ $lote->valor }}</td>
+                <td>{{ $lote->product?->name ?? 'Unknown' }}</td>
+
+
+                <td><a href="{{ url('editlote/' . $lote->id . '/edit') }}">Edit</a></td>
                 <td>
-                    <form action="{{ url('deleteUser/' . $user->id) }}" method="POST">
+                    <form action="{{ url('deletelote/' . $lote->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -83,7 +75,7 @@
 
 
 
-{{ $users->links('pagination::bootstrap-4')->with([
+{{ $lotes->links('pagination::bootstrap-4')->with([
     'size' => 'sm',
     'class' => 'pagination-sm'
 ]) }}
@@ -94,6 +86,7 @@
         {{ $message }}
     </div>
 @endif
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8" crossorigin="anonymous"></script>

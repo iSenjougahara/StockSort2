@@ -32,8 +32,12 @@
     </div>
 </nav>
 
-    
-
+<div class="container mt-5">
+<div class="row justify-content-end mb-3">
+    <div class="col-md-6">
+        <a href="/newProduto" class="btn btn-primary">New Product</a>
+    </div>
+</div>
 
 <table class="table">
     <thead>
@@ -53,7 +57,7 @@
                 <td>{{ $produto->valor }}</td>
                 <td><a href="{{ url('editProduto/' . $produto->id . '/edit') }}">Edit</a></td>
                 <td>
-                    <form action="{{ url('deleteUser/' . $produto->id) }}" method="POST">
+                    <form action="{{ url('deleteProduto/' . $produto->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -72,11 +76,16 @@
 ]) }}
 
 
-@if (isset($message))
+@if (session()->has('message'))
+
     <div class="alert alert-success" role="alert">
-        {{ $message }}
+        {{session('message')}}
     </div>
-@endif
+    @endif
+
+
+
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8" crossorigin="anonymous"></script>
